@@ -1,0 +1,169 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <time.h>
+#include <stdlib.h>
+
+//random walk
+
+int main(int argc, char ** argv){
+
+	int n = 0;
+	scanf("%i", &n);
+
+	char arr[n][n];
+
+	for(int i = 0; i < n; i++){
+
+		for(int j = 0; j < n; j++){
+
+			arr[i][j] = '.';
+		}
+	}
+	arr[0][0] = 'A';
+
+	srand(time(NULL));
+	int r = 0;
+
+	char alphabet[25] = {'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+						'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+						'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+
+	bool finished = false;
+	int count = 0;
+	int i = 0;
+	int direction= 0;
+	int rows = 0;
+	int columns = 0;
+	bool keepGoing = false;
+
+	bool upCheck = false;
+	bool downCheck = false;
+	bool leftCheck = false;
+	bool rightCheck = false;
+	bool incrementYet = false;
+
+	while(!finished){
+
+		if(incrementYet){
+
+			i++;
+			incrementYet = false;
+		}
+
+		keepGoing = false;
+		upCheck = false;
+		downCheck = false;
+		leftCheck = false;
+		rightCheck = false;
+
+		direction = rand() % 4;
+
+		if(direction == 0 || !incrementYet){		//RIGHT
+
+			if(columns == n - 1){
+
+				if(arr[rows][0] == '.'){
+
+					arr[rows][0] = alphabet[i];
+					rightCheck = true;
+					rows;
+					columns = 0;
+					keepGoing = true;
+					incrementYet = true;
+				}	
+			}
+		}
+		if(direction == 0 && !keepGoing && arr[rows][columns + 1] == '.'){
+
+			arr[rows][columns + 1] = alphabet[i];
+			rows;
+			columns++;
+			rightCheck = true;
+			incrementYet = true;
+		}
+		if(direction == 1 || !incrementYet){		//LEFT
+
+			if(columns == 0 && arr[rows][n - 1] == '.'){
+
+				arr[rows][n - 1] = alphabet[i];
+
+				rows;
+				columns = n - 1;
+				leftCheck = true;
+				keepGoing = true;
+				incrementYet = true;
+			}
+		}
+		if(direction == 1 && !keepGoing && arr[rows][columns - 1] == '.'){
+
+			arr[rows][columns - 1] = alphabet[i];
+
+			rows;
+			columns--;
+			leftCheck = true;
+			incrementYet = true;
+		}
+		if(direction == 2 || !incrementYet){		//UP
+
+			if(columns == 0 && arr[n - 1][columns] == '.'){
+
+				arr[n - 1][columns] = alphabet[i];
+				
+				rows = n -1;
+				columns;
+				keepGoing = true;
+				upCheck = true;
+				incrementYet = true;
+			}
+		}
+		if(direction == 2 && !keepGoing && arr[rows - 1][columns] == '.'){
+
+			arr[rows- 1][columns] = alphabet[i];
+			upCheck = true;
+			rows--;
+			columns;
+			incrementYet = true;
+		}
+		if(direction == 3 || !incrementYet){		//DOWN
+
+			if(rows == n - 1 && arr[0][columns] == '.'){
+
+				arr[0][columns] = alphabet[i];
+				downCheck = true;
+				rows = 0;
+				columns;
+				keepGoing = true;
+				incrementYet = true;
+			}
+		}
+		if(direction == 3 && !keepGoing && arr[rows + 1][columns] == '.'){
+
+			arr[rows+1][columns] = alphabet[i];
+			downCheck = true;
+			rows++;
+			columns;
+			incrementYet = true;
+		}
+		if(r == 56){
+
+			finished = true;
+		}
+		r++;
+
+		if(i == 25){
+
+			printf("%s\n", "we got to z!");
+			break;
+		}
+	}
+
+	for(int i = 0; i < n; i++){
+
+		for(int j = 0; j < n; j++){
+
+			printf("%c", arr[i][j]);
+		}
+		printf("\n");
+	}
+}
+
