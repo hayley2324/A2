@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 //random walk
+//this is a test!
 
 int main(int argc, char ** argv){
 
