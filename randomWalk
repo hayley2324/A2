@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 //random walk
-//this is a test!
+//solution to CS2263 Assignment 2, problem 2
 
 int main(int argc, char ** argv){
 
