@@ -6,6 +6,7 @@
 //random walk
 //solution to CS2263 Assignment 2, problem 2
 
+//main method
 int main(int argc, char ** argv){
 
 	int n = 0;
